@@ -1,13 +1,9 @@
-# [Blank 3.3.0](http://blank.vc)
+# Blank template for Joomla 3.X
 
-Light, powerful and free template for Joomla!
-for faster and easier web development.
+This is basically a fork of the [https://github.com/Bloggerschmidt/Blank](Blank), a light, powerful and free template for Joomla!
+for faster and easier web development. It also implements some techniques to improve page speed (and Google PageSpeed Insights rankings).
 
-## Demo
-
-Look at [http://d.blank.vc](http://d.blank.vc) to see the source. Keep in mind it's only a blank white page. The source is with you web developer.
-
-## Functions
+## Original Functions
 
 * Crazy fast with css compressor
 * Start from scratch with normalize.css
@@ -15,9 +11,20 @@ Look at [http://d.blank.vc](http://d.blank.vc) to see the source. Keep in mind i
 * Customizable error, offline and print page
 * Integrated less compiler
 
+## Improvements
+
+* added HTML compression
+* added development mode switch (write and include static css)
+* added support for critical path css (aka above the fold css)
+* updated to normalize 5.0
+* moved js/css to the end of the body tag
+* cleaned code, removed obsolete methods, improved readability
+* added index.html files to all subfolders to prevent directory listings
+
+
 ## Addons 
 
-* [normalize.css 3.0.2](http://necolas.github.com/normalize.css/)
+* [normalize.css 5.0](http://necolas.github.com/normalize.css/)
 * [lessphp v0.5.0](https://github.com/leafo/lessphp)
 
 ## PSD
@@ -32,19 +39,11 @@ Look at [http://d.blank.vc](http://d.blank.vc) to see the source. Keep in mind i
 
 Read the [wiki to get started](https://github.com/Bloggerschmidt/Blank-Template/wiki/Getting-started).
 
-## Bootstrap
-
-Take a look at [Blank Boostrap Edition](https://github.com/Bloggerschmidt/Blank-Bootstrap-Edition).
-
-## ~~Documentation~~
-
-~~Beginn to understand the whole template by reading the ebook.~~
-
 ## Forum
 
 [Question and answers](http://old.blank.vc/) about the template in the ol' forum.
 
 ## Licence
 
-Blank is open source software released under [GPL](http://www.gnu.org/licenses/gpl-2.0.txt).
+Blank template is open source software released under [GPL](http://www.gnu.org/licenses/gpl-2.0.txt).
 

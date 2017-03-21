@@ -5,7 +5,7 @@ $app = JFactory::getApplication();
 $doc = JFactory::getDocument(); 
 $tpath = $this->baseurl . '/templates/' . $this->template;
 
-?><!doctype html>
+?><!DOCTYPE html>
 
 <html lang="<?php echo $this->language; ?>">
 
