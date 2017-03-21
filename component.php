@@ -2,13 +2,13 @@
 
 // variables
 $doc = JFactory::getDocument(); 
-$tpath = $this->baseurl.'/templates/'.$this->template;
+$tpath = $this->baseurl . '/templates/' . $this->template;
 
 // generator tag
-$this->setGenerator(null);
+$this->setGenerator( null );
 
 // load sheets and scripts
-$doc->addStyleSheet($tpath.'/css/print.css?v=1'); 
+$doc->addStyleSheet( $tpath.'/css/print.css?v=1' ); 
 
 ?><!doctype html>
 
@@ -23,7 +23,7 @@ $doc->addStyleSheet($tpath.'/css/print.css?v=1');
     <jdoc:include type="message" />
     <jdoc:include type="component" />
   </div>
-  <?php if ($_GET['print'] == '1') echo '<script type="text/javascript">window.print();</script>'; ?>
+  <?php if ('1' == JFactory::getApplication()->input->get('print')) echo '<script type="text/javascript">window.print();</script>'; ?>
 </body>
 
 </html>
