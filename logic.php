@@ -13,7 +13,7 @@ $tpath = $this->baseurl . '/templates/' . $this->template;
 $this->setGenerator( null );
 
 // template js
-$doc->addScript( $tpath.'/js/logic.js' );
+$doc->addScript( $tpath . '/js/logic.js' );
 
 //add critical css support (aka "above the fold" css)
 $critical = JPATH_THEMES . '/' . $this->template . '/css/critical.css';
@@ -22,7 +22,6 @@ $criticalcss = @file_get_contents( $critical ); //dont throw error if no file
 if ( ! empty($criticalcss) ) {
     $doc->addStyleDeclaration($criticalcss);
 }
-$doc->addStylesheet('some/stylesheet.css');
 
 //move scripts and css to the end of body to keep it from blocking
 $scripts = '';
@@ -38,3 +37,6 @@ foreach( $doc->_scripts as $script => $settings) {
     $scripts .= '<script' . $async . $defer . ' type="text/javascript" src="' . $script . '"></script>' . "\n";
     unset( $doc->_scripts[$script] );
 }
+
+$scripts .= '<script type="text/javascript">' . implode( ' ' , $doc->_script) . '</script>';
+unset($doc->_script);
