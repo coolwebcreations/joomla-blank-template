@@ -11,7 +11,7 @@ $this->setGenerator(null);
 // load sheets and scripts
 $doc->addStyleSheet($tpath.'/css/offline.css?v=1'); 
 
-?><!doctype html>
+?><!DOCTYPE html>
 
 <html lang="<?php echo $this->language; ?>">
 

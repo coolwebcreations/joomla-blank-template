@@ -23,7 +23,11 @@ $doc->addStyleSheet( $tpath.'/css/print.css?v=1' );
     <jdoc:include type="message" />
     <jdoc:include type="component" />
   </div>
-  <?php if ('1' == JFactory::getApplication()->input->get('print')) echo '<script type="text/javascript">window.print();</script>'; ?>
+  <?php
+    if ('1' == JFactory::getApplication()->input->get( 'print' ) ) {
+      echo '<script type="text/javascript">window.print();</script>';
+    }
+  ?>
 </body>
 
 </html>

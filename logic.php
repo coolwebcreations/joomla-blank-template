@@ -1,6 +1,6 @@
 <?php defined( '_JEXEC' ) or die;
 
-// variables
+//defaults
 $app = JFactory::getApplication();
 $doc = JFactory::getDocument();
 $menu = $app->getMenu();
@@ -8,6 +8,13 @@ $active = $app->getMenu()->getActive();
 $params = $app->getParams();
 $pageclass = $params->get( 'pageclass_sfx' );
 $tpath = $this->baseurl . '/templates/' . $this->template;
+
+$templateCSS = $tpath . '/css/template.min.css';
+
+if ( $devmode ) {
+  $templateCSS = $tpath . '/css/template.css.php';
+}
+$doc->addStyleSheet( $templateCSS );
 
 // remove generator tag
 $this->setGenerator( null );
@@ -21,6 +28,27 @@ $criticalcss = @file_get_contents( $critical ); //dont throw error if no file
 
 if ( ! empty($criticalcss) ) {
     $doc->addStyleDeclaration($criticalcss);
+}
+
+switch ($framework){
+    case 'bootstrap':
+        $doc->addStyleSheet($tpath . '/css/bootstrap.min.css');
+        $doc->addScript($tpath.'/js/bootstrap.min.js');
+        break;
+    
+    case 'skeleton':
+        $doc->addStyleSheet($tpath . '/css/skeleton.min.css');
+        break;
+    
+    case 'materialize':
+        JHtml::_('jquery.framework');
+        $doc->addStyleSheet('//fonts.googleapis.com/icon?family=Material+Icons');
+        $doc->addStyleSheet($tpath . '/css/materialize.min.css');
+        $doc->addScript($tpath.'/js/materialize.min.js');
+        break;
+    
+    default:   
+        break;
 }
 
 //move scripts and css to the end of body to keep it from blocking
@@ -40,3 +68,36 @@ foreach( $doc->_scripts as $script => $settings) {
 
 $scripts .= '<script type="text/javascript">' . implode( ' ' , $doc->_script) . '</script>';
 unset($doc->_script);
+
+//output buffering
+ob_start();
+
+function minimize( $body = '') {
+  $replace = array(
+    //remove tabs before and after HTML tags
+    '/\>[^\S ]+/s'   => '>',
+    '/[^\S ]+\</s'   => '<',
+    //shorten multiple whitespace sequences; keep new-line characters because they matter in JS!!!
+    '/([\t ])+/s'  => ' ',
+    //remove leading and trailing spaces
+    '/^([\t ])+/m' => '',
+    '/([\t ])+$/m' => '',
+    // remove JS line comments (simple only); do NOT remove lines containing URL (e.g. 'src="http://server.com/"')!!!
+    '~//[a-zA-Z0-9 ]+$~m' => '',
+    //remove empty lines (sequence of line-end and white-space characters)
+    '/[\r\n]+([\t ]?[\r\n]+)+/s'  => "\n",
+    //remove empty lines (between HTML tags); cannot remove just any line-end characters because in inline JS they can matter!
+    '/\>[\r\n\t ]+\</s'    => '><',
+    //remove "empty" lines containing only JS's block end character; join with next line (e.g. "}\n}\n</script>" --> "}}</script>"
+    '/}[\r\n\t ]+/s'  => '}',
+    '/}[\r\n\t ]+,[\r\n\t ]+/s'  => '},',
+    //remove new-line after JS's function or condition start; join with next line
+    '/\)[\r\n\t ]?{[\r\n\t ]+/s'  => '){',
+    '/,[\r\n\t ]?{[\r\n\t ]+/s'  => ',{',
+    //remove new-line after JS's line end (only most obvious and safe cases)
+    '/\),[\r\n\t ]+/s'  => '),',
+    //remove quotes from HTML attributes that does not contain spaces; keep quotes around URLs!
+    //'~([\r\n\t ])?([a-zA-Z0-9]+)="([a-zA-Z0-9_/\\-]+)"([\r\n\t ])?~s' => '$1$2=$3$4', //$1 and $4 insert first white-space character found before/after attribute
+  );
+  return preg_replace( array_keys( $replace ) , array_values( $replace ) , $body );
+}
