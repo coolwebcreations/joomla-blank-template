@@ -20,7 +20,7 @@ for faster and easier web development. It also implements some techniques to imp
 * moved js/css to the end of the body tag
 * cleaned code, removed obsolete methods, improved readability
 * added index.html files to all subfolders to prevent directory listings
-* added css frameworks [bootstrap](https://github.com/twbs/bootstrap),  [skeleton framework](https://github.com/skeleton-framework/skeleton-framework) and [materialize](https://github.com/Dogfalo/materialize), simply chose your favorite
+* added css frameworks: bootstap (Joomla! default), [bootstrap-current](https://github.com/twbs/bootstrap),  [skeleton framework](https://github.com/skeleton-framework/skeleton-framework) and [materialize](https://github.com/Dogfalo/materialize), simply chose your favorite
 
 
 ## Addons 

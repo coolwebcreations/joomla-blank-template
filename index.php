@@ -2,7 +2,7 @@
 
 // settings
 $devmode = true; //set devmod = false to load static css instead of less
-$framework = 'none'; //you may chose between bootstrap, skeleton and materialize
+$framework = 'none'; //you may chose between bootstrap, bootstrap-current, skeleton and materialize
 
 include_once JPATH_THEMES . '/' . $this->template . '/logic.php';
 ?><!DOCTYPE html>

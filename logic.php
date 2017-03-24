@@ -32,6 +32,12 @@ if ( ! empty($criticalcss) ) {
 
 switch ($framework){
     case 'bootstrap':
+        $direction = 'ltr';
+        JHtmlBootstrap::framework();
+        JHtmlBootstrap::loadCSS(true, $direction);
+        break;
+    
+    case 'bootstrap-current':
         JHtml::_('jquery.framework');
         $doc->addStyleSheet($tpath . '/css/bootstrap.min.css');
         $doc->addScript($tpath.'/js/bootstrap.min.js');
