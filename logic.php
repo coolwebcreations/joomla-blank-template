@@ -3,6 +3,8 @@
 //defaults
 $app = JFactory::getApplication();
 $doc = JFactory::getDocument();
+$doc->setHtml5(true);
+
 $menu = $app->getMenu();
 $active = $app->getMenu()->getActive();
 $params = $app->getParams();
@@ -44,6 +46,7 @@ switch ($framework){
         break;
     
     case 'skeleton':
+    case 'skeleton-framework':
         $doc->addStyleSheet($tpath . '/css/skeleton.min.css');
         break;
     
@@ -61,19 +64,19 @@ switch ($framework){
 //move scripts and css to the end of body to keep it from blocking
 $scripts = '';
 foreach( $doc->_styleSheets as $sheet => $settings ) {
-    $media = false == $settings['media'] ? '' : ' media="' . $settings['media'] . '"';
+    $media = ( false == $settings['media'] ) ? '' : ' media="' . $settings['media'] . '"';
     $scripts .= '<link ' . $media . $type . 'rel="stylesheet" href="' . $sheet . '">';
     unset( $doc->_styleSheets[$sheet] );
 }
 
 foreach( $doc->_scripts as $script => $settings) {
-    $async = false == $settings['async'] ? '' : ' async';
-    $defer = false == $settings['defer'] ? '' : ' defer';
+    $async = ( false == $settings['async'] ) ? '' : ' async';
+    $defer = ( false == $settings['defer'] ) ? '' : ' defer';
     $scripts .= '<script' . $async . $defer . ' type="text/javascript" src="' . $script . '"></script>' . "\n";
     unset( $doc->_scripts[$script] );
 }
 
-$scripts .= '<script type="text/javascript">' . implode( ' ' , $doc->_script) . '</script>';
+$scripts .= '<script type="text/javascript">' . implode( ' ' , $doc->_script ) . '</script>';
 unset($doc->_script);
 
 //output buffering
