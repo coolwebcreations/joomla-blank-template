@@ -3,7 +3,7 @@
 //defaults
 $app = JFactory::getApplication();
 $doc = JFactory::getDocument();
-$doc->setHtml5(true);
+$doc->setHtml5( true );
 
 $menu = $app->getMenu();
 $active = $app->getMenu()->getActive();
@@ -13,7 +13,7 @@ $tpath = $this->baseurl . '/templates/' . $this->template;
 
 $templateCSS = $tpath . '/css/template.min.css';
 
-if ( $devmode ) {
+if ( isset( $devmode ) ) {
   $templateCSS = $tpath . '/css/template.css.php';
 }
 $doc->addStyleSheet( $templateCSS );
@@ -28,44 +28,48 @@ $doc->addScript( $tpath . '/js/logic.js' );
 $critical = JPATH_THEMES . '/' . $this->template . '/css/critical.css';
 $criticalcss = @file_get_contents( $critical ); //dont throw error if no file
 
-if ( ! empty($criticalcss) ) {
-    $doc->addStyleDeclaration($criticalcss);
+if ( ! empty( $criticalcss ) ) {
+    $doc->addStyleDeclaration( $criticalcss );
 }
 
-switch ($framework){
-    case 'bootstrap':
-        $direction = 'ltr';
-        JHtmlBootstrap::framework();
-        JHtmlBootstrap::loadCSS(true, $direction);
-        break;
-    
-    case 'bootstrap-current':
-        JHtml::_('jquery.framework');
-        $doc->addStyleSheet($tpath . '/css/bootstrap.min.css');
-        $doc->addScript($tpath.'/js/bootstrap.min.js');
-        break;
-    
-    case 'skeleton':
-    case 'skeleton-framework':
-        $doc->addStyleSheet($tpath . '/css/skeleton.min.css');
-        break;
-    
-    case 'materialize':
-        JHtml::_('jquery.framework');
-        $doc->addStyleSheet('//fonts.googleapis.com/icon?family=Material+Icons');
-        $doc->addStyleSheet($tpath . '/css/materialize.min.css');
-        $doc->addScript($tpath.'/js/materialize.min.js');
-        break;
-    
-    default:   
-        break;
+switch ( $framework ){
+   case 'bootstrap':
+       $direction = 'ltr';
+       JHtmlBootstrap::framework();
+       JHtmlBootstrap::loadCSS( true, $direction );
+       break;
+   
+   case 'bootstrap-current':
+       JHtml::_( 'jquery.framework' );
+       $doc->addStyleSheet( $tpath . '/css/bootstrap.min.css' );
+       $doc->addScript( $tpath.'/js/bootstrap.min.js' );
+       break;
+   
+   case 'skeleton':
+   case 'skeleton-framework':
+       $doc->addStyleSheet( $tpath . '/css/skeleton.min.css' );
+       break;
+   
+   case 'materialize':
+       JHtml::_( 'jquery.framework' );
+       $doc->addStyleSheet( '//fonts.googleapis.com/icon?family=Material+Icons' );
+       $doc->addStyleSheet( $tpath . '/css/materialize.min.css' );
+       $doc->addScript( $tpath . '/js/materialize.min.js' );
+       break;
+   
+   default:   
+       break;
+}
+
+if ( isset ( $fontAwesome ) ){
+  $doc->addStyleSheet( $tpath . '/css/fontawesome.min.css' );
 }
 
 //move scripts and css to the end of body to keep it from blocking
 $scripts = '';
 foreach( $doc->_styleSheets as $sheet => $settings ) {
     $media = ( false == $settings['media'] ) ? '' : ' media="' . $settings['media'] . '"';
-    $scripts .= '<link ' . $media . $type . 'rel="stylesheet" href="' . $sheet . '">';
+    $scripts .= '<link ' . $media . 'rel="stylesheet" href="' . $sheet . '">';
     unset( $doc->_styleSheets[$sheet] );
 }
 
@@ -77,7 +81,7 @@ foreach( $doc->_scripts as $script => $settings) {
 }
 
 $scripts .= '<script type="text/javascript">' . implode( ' ' , $doc->_script ) . '</script>';
-unset($doc->_script);
+unset( $doc->_script );
 
 //output buffering
 ob_start();

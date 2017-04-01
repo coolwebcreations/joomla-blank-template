@@ -19,6 +19,7 @@
 		<folder>css</folder>
 		<folder>images</folder>
 		<folder>js</folder>
+		<folder>fonts</folder>
 		<filename>component.php</filename>
 		<filename>error.php</filename>
 		<filename>index.php</filename>
