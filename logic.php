@@ -81,7 +81,7 @@ foreach( $doc->_scripts as $script => $settings) {
 }
 
 $scripts .= '<script type="text/javascript">' . implode( ' ' , $doc->_script ) . '</script>';
-unset( $doc->_script );
+$doc->_script = array();
 
 //output buffering
 ob_start();
