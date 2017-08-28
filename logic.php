@@ -16,13 +16,9 @@ $templateCSS = $tpath . '/css/template.min.css';
 if ( isset( $devmode ) ) {
   $templateCSS = $tpath . '/css/template.css.php';
 }
-$doc->addStyleSheet( $templateCSS );
 
 // remove generator tag
 $this->setGenerator( null );
-
-// template js
-$doc->addScript( $tpath . '/js/logic.js' );
 
 //add critical css support (aka "above the fold" css)
 $critical = JPATH_THEMES . '/' . $this->template . '/css/critical.css';
@@ -64,6 +60,10 @@ switch ( $framework ){
 if ( isset ( $fontAwesome ) ){
   $doc->addStyleSheet( $tpath . '/css/fontawesome.min.css' );
 }
+
+// template js
+$doc->addScript( $tpath . '/js/logic.js' );
+$doc->addStyleSheet( $templateCSS );
 
 //move scripts and css to the end of body to keep it from blocking
 $scripts = '';
